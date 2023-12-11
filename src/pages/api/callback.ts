@@ -6,7 +6,11 @@ export default async function handler(
 ) {
   const code = req.query.code as string;
 
-  // Exchange code for token
+  const params: Record<string, string> = {
+    code,
+    redirect_uri: process.env.REDIRECT_URI ?? "http://localhost:3000",
+    grant_type: "authorization_code",
+  };
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
@@ -17,11 +21,8 @@ export default async function handler(
           process.env.NEXT_PUBLIC_CLIENT_ID + ":" + process.env.CLIENT_SECRET
         ).toString("base64"),
     },
-    body: new URLSearchParams({
-      code,
-      redirect_uri: process.env.REDIRECT_URI,
-      grant_type: "authorization_code",
-    }),
+
+    body: new URLSearchParams(params),
   });
 
   const data = await response.json();

@@ -8,7 +8,9 @@ export default async function handler(
 
   const params: Record<string, string> = {
     code,
-    redirect_uri: process.env.REDIRECT_URI ?? "http://localhost:3000",
+    redirect_uri:
+      process.env.NEXT_PUBLIC_REDIRECT_URI ??
+      "http://localhost:3000/api/callback",
     grant_type: "authorization_code",
   };
   const response = await fetch("https://accounts.spotify.com/api/token", {

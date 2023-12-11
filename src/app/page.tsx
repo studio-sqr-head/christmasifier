@@ -234,13 +234,13 @@ export default function Home() {
   useEffect(() => {
     // listen for enter key and if search query is not empty, open modal
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Enter" && searchQuery.length > 0) {
         setIsSearchModalOpen(true);
       }
     };
 
-    const handleEscape = (e) => {
+    const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isSearchModalOpen) {
         setIsSearchModalOpen(false);
       }
@@ -458,20 +458,3 @@ export default function Home() {
     </main>
   );
 }
-
-const SpotifyPlayer = ({ token: string }) => {
-  useEffect(() => {
-    if (window.Spotify) {
-      initializeSpotifyPlayer(token);
-    } else {
-      // Load Spotify Web Playback SDK script and then initialize the player
-    }
-  }, []);
-
-  const initializeSpotifyPlayer = (token) => {
-    // Spotify Web Playback SDK initialization and event handling
-  };
-
-  // Render controls and other UI components
-  return <div>{/* Player controls */}</div>;
-};
